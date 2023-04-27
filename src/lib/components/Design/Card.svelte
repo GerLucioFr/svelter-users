@@ -1,43 +1,37 @@
 <script>
-	export let user = {
+	export let product = {
 		id: null,
-		name: '',
-		username: '',
-		email: '',
-		address: {
-			street: '',
-			suite: '',
-			city: '',
-			zipcode: '',
-			geo: {
-				lat: '',
-				lng: ''
-			}
-		},
-		phone: '',
-		website: '',
-		company: {
-			name: '',
-			catchPhrase: '',
-			bs: ''
-		},
-		photo: ''
+		title: '',
+		description: '',
+		price: 0,
+		discountPercentage: 0,
+		rating: 0,
+		stock: 0,
+		brand: '',
+		category: '',
+		thumbnail: ''
 	};
 </script>
 
 <div class="card mb-4">
-	<img src={user.photo} class="card-img-top" alt={user.name} />
+	<img src={product.thumbnail} class="card-img-top" alt={product.title} />
 	<div class="card-body">
-		<h5 class="card-title">{user.name}</h5>
-		<p class="card-text">
-			{user.address?.street}, {user.address?.suite}, {user.address?.zipcode}, {user.address?.city}
+		<h4 class="card-title">{product.title}</h4>
+		<p class="mb-4">
+			<b>${product.price}</b>
+
+			{#if product.discountPercentage}
+				<span class="badge rounded-pill text-bg-danger">-{product.discountPercentage}%</span>
+			{/if}
 		</p>
+		<span class="badge rounded-pill text-bg-warning"
+			><i class="fa-solid fa-star" /> {product.rating}</span
+		>
 	</div>
 	<ul class="list-group list-group-flush">
-		<li class="list-group-item"><b>Username:</b> @{user.username}</li>
-		<li class="list-group-item"><b>Email:</b> {user.email}</li>
-		<li class="list-group-item"><b>Phone:</b> {user.phone}</li>
-		<li class="list-group-item"><b>Company:</b> {user.company?.name}</li>
+		<li class="list-group-item"><b>Brand:</b> {product.brand}</li>
+		<li class="list-group-item"><b>Category:</b> {product.category}</li>
+		<li class="list-group-item"><b>Stock:</b> {product.stock} units</li>
 	</ul>
 </div>
 
@@ -45,5 +39,11 @@
 	.card {
 		width: 400px;
 		padding: 12px;
+	}
+
+	.card-img-top {
+		width: 100%;
+		height: 200px;
+		object-fit: cover;
 	}
 </style>

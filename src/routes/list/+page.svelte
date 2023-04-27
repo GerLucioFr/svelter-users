@@ -2,16 +2,17 @@
 	import Card from '$lib/components/Design/Card.svelte';
 	import photo from '$lib/assets/img/image.jpg';
 
-	let users = [];
+	let products = [];
 	let promise = getData();
 	async function getData() {
-		const res = await fetch('https://jsonplaceholder.typicode.com/users');
-		users = await res.json();
+		const res = await fetch('https://dummyjson.com/products');
+		const data = await res.json();
+		products = data.products;
 
 		if (res.ok) {
-			return users.map((user) => {
+			return products.map((product) => {
 				return {
-					...user,
+					...product,
 					photo
 				};
 			});
@@ -21,13 +22,13 @@
 	}
 </script>
 
-<a href="/add" class="btn btn-primary mt-2 mb-5">Add User</a>
+<a href="/add" class="btn btn-primary mt-2 mb-5">Add product</a>
 <div class="row justify-content-between">
 	{#await promise}
 		<p>Getting data...</p>
-	{:then users}
-		{#each users as user}
-			<Card {user} />
+	{:then products}
+		{#each products as product}
+			<Card {product} />
 		{:else}
 			<h4>No data found</h4>
 		{/each}
